@@ -10,7 +10,8 @@
 #
 class bacula_extras::puppetcerts
 (
-  String $puppet_ssl_dir
+  String $puppet_ssl_dir,
+  Type   $notify_target = undef,
 )
 {
 
@@ -51,6 +52,7 @@ class bacula_extras::puppetcerts
       owner   => 'root',
       group   => $bacula_group,
       require => Posix_acl[$bacula_ssl_dir],
+      notify  => $notify_target,
     }
 
     #posix_acl { $key[1]:
